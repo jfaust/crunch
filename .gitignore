@@ -1,2 +1,5 @@
 *.o
 crnlib/crunch
+
+build
+build.*
