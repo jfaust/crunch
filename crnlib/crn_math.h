@@ -105,6 +105,9 @@ inline bool is_power_of_2(uint32 x) {
 inline bool is_power_of_2(uint64 x) {
   return x && ((x & (x - 1U)) == 0U);
 }
+inline bool is_power_of_2(size_t x) {
+  return x && ((x & (x - 1U)) == 0U);
+}
 
 template <typename T>
 inline T align_up_value(T x, uint alignment) {
@@ -139,6 +142,17 @@ inline uint32 next_pow2(uint32 val) {
 }
 
 inline uint64 next_pow2(uint64 val) {
+  val--;
+  val |= val >> 32;
+  val |= val >> 16;
+  val |= val >> 8;
+  val |= val >> 4;
+  val |= val >> 2;
+  val |= val >> 1;
+  return val + 1;
+}
+
+inline uint64 next_pow2(size_t val) {
   val--;
   val |= val >> 32;
   val |= val >> 16;
